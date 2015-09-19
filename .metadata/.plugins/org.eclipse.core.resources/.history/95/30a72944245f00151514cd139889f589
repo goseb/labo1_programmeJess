@@ -19,7 +19,7 @@
 
 )
 
-(deffacts Relation
+(deffacts RelationPersonnage
 
     ; Relations personnages
 
@@ -44,7 +44,7 @@
 
 )
 
-(deffacts Location
+(deffacts Lieu
 
     ; Acces des lieu
 
@@ -56,33 +56,21 @@
     (acces entre cabane-jardinier et jardin)
 	(acces entre salle-de-conference et jardin)
     (acces entre cuisine et cafeteria)
-    
-   (passage secret entre cuisine et jardin)
 
 )
 
 (deffacts Evenement
-	 
-    (meurtre est un evenement)
-    (rencontre est un evenement)
-    (travailler est un evenement)
-    (quitter travail est un evenement)
-    (renvoyer est un evenement)
-  
 
-)
+    ; Personnage dans lieu a un moment donne == ;au-lieu, du-temp,au-temp, a-Lheure
 
-(deffacts Faits
 
-      ; Personnage dans lieu a un moment donne == ;au-lieu, du-temp,au-temp, a-Lheure
-
-    (acces de-temps 8 a-temps 10)
-	(meurtre endroit jardin )
+    (acces du-temp 8 au-temp 10)
+	(meurtre au-lieu jardin )
     (meurtre instrument contendante)
     (acces de salle-de-conference par garde-du-corp a-heure 9)
     (acces de sale-de-bain par Mary a-heure 10)
-    
-    ) 
+
+)
 
 (deffacts Arme
 
@@ -95,24 +83,23 @@
     (blessure contendante peut etre faite par arme statuette)
 
 	(blessure contendante peut etre faite par arme hache)
-    (blessure contendante peut etre faite par arme pelle)
 
 	(blessure projectile peut etre faite par arme fusil)
 
-	;(blessure projectile peut etre faite par arme arc)
+	(blessure projectile peut etre faite par arme arc)
 
 
     ; Liste des lieu ou sont les armes
 
     (arme couteau est dans cuisinne)
 
-	(arme hache est dans halle)
-	
-	(arme statuette est dans bureauVP)
-	
-	(arme fusil est dans locker)
+(arme hache est dans halle)
 
-    (arme pelle est dans jardin)
+(arme statuette est dans bureauVP)
+
+(arme fusil est dans locker)
+
+    (arme arc est dans jardin)
 
 )
 
@@ -130,13 +117,27 @@
 
     ; Info lieu
 
-    (mort lieu jardin)
+    (mort lieu cour-arriere)
 
 )
 
+/*
+(defrule SubAccesLieu
 
+    ; Acces dans un sens est double sens 
 
-(defrule proximite
+    (acces ?personnage a-lieu ?lieuAcces)
+    (acces entre ?lieuAcces et ?lieuEvenement)
+ 
+	=>
+
+	;(printout t "acces entre " ?lieu1 " et " ?lieu2 " est vrai dans les deux sens" crlf)
+
+    (assert (acces ?personnage a-lieu ?lieuEvenement))
+
+ )*/
+
+(defrule Lieu-proximite-evenement
 
     ; était possiblement sur les lieux selon un intervalle de temps
 
@@ -145,7 +146,7 @@
  
     (acces de ?lieuAcces par ?personne a-heure ?tempAcces)
  
-    (acces de-temps ?tempDebut a-temps ?tempFin )
+    (acces du-temp ?tempDebut au-temp ?tempFin )
 
     (acces entre ?lieuAcces et ?lieuEvenement)
 
@@ -153,21 +154,12 @@
     (test(>= ?tempAcces ?tempDebut))
     =>
 
+
     (printout t "si " ?personne " était dans " ?lieuAcces" entre " ?tempDebut " et " ?tempFin " heure peut être a proximite de " ?lieuEvenement  crlf)
 
-    (assert (personne-lieu ?personne et ?lieuEvenement))
+    (assert (proximite entre ?personne et ?lieuEvenement))
 
 )
-(defrule arme-lieu-du-meurtre
-    (arme ?arme est dans ?lieuEvenement)
-    (personne-lieu ?personne et ?lieuEvenement)
-    
-    =>
-     (printout t  ?personne " est sur lieux du crime avec arme " crlf)
-    (assert (arme-lieu-du-meurtre ?personne))
-    
-    
-    )
 
 (defrule BlessureArme
 

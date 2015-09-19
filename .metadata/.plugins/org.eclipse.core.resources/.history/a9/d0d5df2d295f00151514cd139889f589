@@ -159,7 +159,7 @@
 
 )
 (defrule arme-lieu-du-meurtre
-    (arme ?arme est dans ?lieuEvenement)
+    (arme potentiel ?arme est dans ?lieuEvenement)
     (personne-lieu ?personne et ?lieuEvenement)
     
     =>

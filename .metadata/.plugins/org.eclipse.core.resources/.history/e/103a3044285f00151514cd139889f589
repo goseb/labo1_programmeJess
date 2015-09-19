@@ -76,7 +76,7 @@
 
       ; Personnage dans lieu a un moment donne == ;au-lieu, du-temp,au-temp, a-Lheure
 
-    (acces de-temps 8 a-temps 10)
+    (meurtre de-temps 8 a-temps 10)
 	(meurtre endroit jardin )
     (meurtre instrument contendante)
     (acces de salle-de-conference par garde-du-corp a-heure 9)
@@ -95,11 +95,10 @@
     (blessure contendante peut etre faite par arme statuette)
 
 	(blessure contendante peut etre faite par arme hache)
-    (blessure contendante peut etre faite par arme pelle)
 
 	(blessure projectile peut etre faite par arme fusil)
 
-	;(blessure projectile peut etre faite par arme arc)
+	(blessure projectile peut etre faite par arme arc)
 
 
     ; Liste des lieu ou sont les armes
@@ -112,7 +111,7 @@
 	
 	(arme fusil est dans locker)
 
-    (arme pelle est dans jardin)
+    (arme arc est dans jardin)
 
 )
 
@@ -158,13 +157,8 @@
     (assert (personne-lieu ?personne et ?lieuEvenement))
 
 )
-(defrule arme-lieu-du-meurtre
-    (arme ?arme est dans ?lieuEvenement)
-    (personne-lieu ?personne et ?lieuEvenement)
-    
-    =>
-     (printout t  ?personne " est sur lieux du crime avec arme " crlf)
-    (assert (arme-lieu-du-meurtre ?personne))
+(defrule arme-endroit
+    (arme potentiel ?arme est dans ?endroit)
     
     
     )

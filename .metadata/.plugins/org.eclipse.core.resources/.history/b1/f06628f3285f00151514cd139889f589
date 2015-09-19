@@ -76,7 +76,7 @@
 
       ; Personnage dans lieu a un moment donne == ;au-lieu, du-temp,au-temp, a-Lheure
 
-    (acces de-temps 8 a-temps 10)
+    (meurtre de-temps 8 a-temps 10)
 	(meurtre endroit jardin )
     (meurtre instrument contendante)
     (acces de salle-de-conference par garde-du-corp a-heure 9)
@@ -159,7 +159,7 @@
 
 )
 (defrule arme-lieu-du-meurtre
-    (arme ?arme est dans ?lieuEvenement)
+    (arme potentiel ?arme est dans ?lieuEvenement)
     (personne-lieu ?personne et ?lieuEvenement)
     
     =>
