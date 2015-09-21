@@ -17,6 +17,7 @@
 	(travail de John est guarde-du-corps)
 
 )
+
 (deffacts Relation
 
     ; Relations personnages
@@ -41,6 +42,7 @@
 	(responsable du contrat de paysagiste est conseiller)
 
 )
+
 (deffacts Location
 
     ; Acces des lieu
@@ -57,25 +59,30 @@
    (passage secret entre cuisine et jardin)
 
 )
+
 (deffacts Evenement
-	(meurtre est un evenement)
+	 
+    (meurtre est un evenement)
     (rencontre est un evenement)
     (travailler est un evenement)
     (quitter travail est un evenement)
     (renvoyer est un evenement)
   
+
 )
+
 (deffacts Faits
 
       ; Personnage dans lieu a un moment donne == ;au-lieu, du-temp,au-temp, a-Lheure
 
-    (evenement produit de-temps 8 a-temps 10)
+    (acces de-temps 8 a-temps 10)
 	(meurtre endroit jardin )
     (meurtre instrument contendante)
     (acces de salle-de-conference par garde-du-corp a-heure 9)
     (acces de sale-de-bain par Mary a-heure 10)
     
     ) 
+
 (deffacts Arme
 
     ; Liste des armes et leurs blessures
@@ -107,6 +114,7 @@
     (arme pelle est dans jardin)
 
 )
+
 (deffacts Victime
 
     ; Qui

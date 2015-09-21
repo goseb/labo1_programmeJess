@@ -69,7 +69,7 @@
 
       ; Personnage dans lieu a un moment donne == ;au-lieu, du-temp,au-temp, a-Lheure
 
-    (evenement produit de-temps 8 a-temps 10)
+    (meurtre acces de-temps 8 a-temps 10)
 	(meurtre endroit jardin )
     (meurtre instrument contendante)
     (acces de salle-de-conference par garde-du-corp a-heure 9)

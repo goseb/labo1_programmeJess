@@ -1,7 +1,8 @@
 
 
-;(batch "jessFact.clp")
-(batch "jessFact_2ieme-histoire.clp")
+(batch "jessFact.clp")
+
+
 
 
 (defrule proximite
@@ -31,7 +32,7 @@
     (personne-lieu ?personne et ?lieuEvenement)
     
     =>
-     (printout t  ?personne " peut être sur lieux du crime avec arme " crlf)
+     (printout t  ?personne " est sur lieux du crime avec arme " crlf)
     (assert (arme-lieu-du-meurtre ?personne))
     
     )

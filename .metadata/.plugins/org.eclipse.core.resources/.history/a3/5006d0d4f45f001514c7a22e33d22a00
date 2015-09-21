@@ -1,7 +1,6 @@
 
 
-;(batch "jessFact.clp")
-(batch "jessFact_2ieme-histoire.clp")
+(batch "jessFact.clp")
 
 
 (defrule proximite
