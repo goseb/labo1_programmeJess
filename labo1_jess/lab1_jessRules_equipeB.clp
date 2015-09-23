@@ -4,6 +4,7 @@
 ;(batch "jessFact_2ieme-histoire.clp")
 
 (defrule DeplacerCorpForce
+: regle qui permet de vÃ©rifier si une personne Ã©tait assez forte pour dÃ©placer le corp
     (corps a ete deplace de ?endroitTrouverPreuve a ?endroitCorp)
     (force de ?personne est eleve)
     =>   
@@ -13,7 +14,7 @@
     )
 
 (defrule DeplacementSansEtreVue
-    ;***essai avec or...
+    ;********* regle qui vÃ©rifi les dÃ©placements possible des personnages
     (or (deplacement de ?personne par passage secret)
     (deplacement de ?personne est discret))
     =>
@@ -23,27 +24,30 @@
 
 
 (defrule DeplacementCorps
+	;regle qui permet de faire le lien entre des traces de sang et un dÃ©placement possible du corp
     (trouver du sang dans ?endroitTrouverPreuve)
-    (corp découvert dans ?endroitCorp )
+    (corp dÃ©couvert dans ?endroitCorp )
     =>
-    (printout t  " meurtre a eu lieu a endroit trouvé sang: " ?endroitTrouverPreuve " et deplacé dans " ?endroitCorp crlf)
+    (printout t  " meurtre a eu lieu a endroit trouvÃ© sang: " ?endroitTrouverPreuve " et deplacÃ© dans " ?endroitCorp crlf)
     (assert (meurtre a eu lieu a ?endroitTrouverPreuve))
     (assert (corps a ete deplace de ?endroitTrouverPreuve a ?endroitCorp))
 )
 
 (defrule Temoignage
+	; regle qui dit qu'un temoin qui voit quelqu'un sur les lieux est lui mÃªme sur les lieux
     (le temoin ?temoin a vue ?personne dans ?lieu a ?heure heure)
 
     =>
     
-    (printout t ?personne " a été vue a " ?lieu " a " ?heure " heure" crlf)
-    (printout t ?temoin " le témoin était dans " ?lieu " a " ?heure " heure" crlf)
+    (printout t ?personne " a Ã©tÃ© vue a " ?lieu " a " ?heure " heure" crlf)
+    (printout t ?temoin " le tÃ©moin Ã©tait dans " ?lieu " a " ?heure " heure" crlf)
     
     (assert (presence de ?personne dans ?lieu a-temps ?heure heure))
     (assert (presence de ?temoin dans ?lieu a-temp ?heure heure))
 )
 
 (defrule SubAccesLieu
+	; regle qui determine que l'acces est possible dans les 2 sens
 	(acces entre ?lieuAdjacent et ?lieu en ?minute minutes)
 	(not (exists (acces entre ?lieu et ?lieuAdjacent en ?minute minutes))
 	=>
@@ -55,24 +59,24 @@
     (presence de ?personne dans ?lieu a-temps ?heure heure)
     (acces entre ?lieuAdjacent et ?lieu en ?minute minutes)
   	;(/ ?minute 60.0)
-     ;?a <-(/ ?minute 60.0)
-    ;?b <- (+ ?heure ?a)
+	?a <- (/ ?minute 60.0)
+	 ?b <- (+ ?heure ?a)
     ;(bind ?a (+(+ 2 3) (* 3 3)))
       ;?x<- (/ ?temp 60)
     
-   ; ?lapsDeTempMin <-(- ?heure ?x)
-   ; ?lapsDeTempMax <-(+ ?heure ?x)
+    ?lapsDeTempMin <-(- ?heure ?b)
+   ?lapsDeTempMax <-(+ ?heure ?b)
      =>
-    ;(printout t ?personne " était près de " ?lieu " entre " ?lapsDeTempMin " heure et " ?lapsDeTempMax " heure "crlf)
-    ;(assert (proximite de ?personne dans ?lieuAdjacent entre ?lapsDeTempMin et ?lapsDeTempMax ))
+    (printout t ?personne " Ã©tait prÃ¨s de " ?lieu " entre " ?lapsDeTempMin " heure et " ?lapsDeTempMax " heure "crlf)
+    (assert (proximite de ?personne dans ?lieuAdjacent entre ?lapsDeTempMin et ?lapsDeTempMax ))
     
-    (printout t  " proximité de " ?personne " dans "?lieuAdjacent " a " ?heure " heures plus ou moins " ?minute " minutes ----> "  crlf)
-    (assert (proximite de ?personne dans ?lieuAdjacent a ?heure en ?minute minutes))
+   ; (printout t  " proximitÃ© de " ?personne " dans "?lieuAdjacent " a " ?heure " heures plus ou moins " ?minute " minutes ----> "  crlf)
+    ;(assert (proximite de ?personne dans ?lieuAdjacent a ?heure en ?minute minutes))
 )
 
 (defrule ProximiteMeurtre
 
-    ; était possiblement sur les lieux selon un intervalle de temps
+    ; Ã©tait possiblement sur les lieux selon un intervalle de temps
 
     ;au-lieu, du-temp,au-temp, a-Lheure
  
@@ -90,7 +94,7 @@
     ;(test(>= ?lapsDeTempMax ?tempDebut))
     =>
 
-    (printout t "si " ?personne " était dans " ?lieuAdjacent " entre " ?tempDebut " et " ?tempFin " heure peut être a proximite de " ?lieuEvenement  crlf)
+    (printout t "si " ?personne " Ã©tait dans " ?lieuAdjacent " entre " ?tempDebut " et " ?tempFin " heure peut Ãªtre a proximite de " ?lieuEvenement  crlf)
 
     (assert (personne-lieu ?personne et ?lieuEvenement a ?heure))
 )
@@ -101,7 +105,7 @@
     (arme potentiel ?arme)
     (test(= ?objet ?arme ))
     =>
-    (printout t  ?personne " peut être sur lieux du crime avec " ?arme  crlf)
+    (printout t  ?personne " peut Ãªtre sur lieux du crime avec " ?arme  crlf)
     (assert (arme-lieu-du-meurtre ?personne))
 )
 
@@ -197,7 +201,7 @@
 
     =>
 
-    (printout t "Le crime a été fait par " ?nom " avec le/la " ?arme ", une blessure " ?blessure "." crlf)
+    (printout t "Le crime a Ã©tÃ© fait par " ?nom " avec le/la " ?arme ", une blessure " ?blessure "." crlf)
 
     (assert (Meurtrier ?nom))
 
