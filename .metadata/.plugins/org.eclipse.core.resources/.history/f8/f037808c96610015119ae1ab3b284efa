@@ -1,0 +1,122 @@
+(clear)
+
+(deffacts Personnages
+
+    ; Personnages
+
+    (travail de Robert est vice-president)
+
+    (travail de Alicia est menagere)
+
+    (travail de Mary est conseiller)
+
+	(travail de Peter est diplomate)
+
+	(travail de Luis est paysagiste)
+
+	(travail de John est guarde-du-corps)
+
+)
+(deffacts Relations
+
+    ; Relations personnages
+
+    (relation amoureuse entre Robert et Alicia)
+
+    (relation amoureuse entre Alicia et Sergio)
+
+    (drame de renvoi pour John)
+
+	(drame de transfert pour Peter )
+
+    (drame de contrat pour Luis)
+    
+
+	; Relations metiers
+
+    (responsable du renvoi de guarde-du-corps est vice-president)
+
+	(responsable du transfert de diplomate est vice-president)
+
+	(responsable du contrat de paysagiste est conseiller)
+
+)
+(deffacts Acces-au-Lieux
+
+    ; Acces des lieu
+
+    (acces entre cafeteria et salle-de-conference en .2 heure)
+    (acces entre hall-entree et jardin en .2 heure)
+    (acces entre bureauVP et salle-de-conference en .5 heure)
+	(acces entre sale-de-bain et salle-de-conference .2 heure)
+	(acces entre halle-entre et cafeteria en .2 heure)
+    (acces entre cabane-jardinier et jardin .5 heure)
+	(acces entre salle-de-conference et jardin en .5 heure)
+    (acces entre cuisine et cafeteria en .1 heure)
+    
+   (passage secret entre cuisine et jardin)
+
+)
+
+(deffacts Faits
+
+      ; Personnage dans lieu a un moment donne == ;au-lieu, du-temp,au-temp, a-Lheure
+
+    (l'evenement s'est produit de-temps 8 a-temps 10)
+	(corp découvert dans jardin )
+    (meurtre instrument contendante)
+    (acces de jardin par garde-du-corp a-heure 9)
+    (acces de sale-de-bain par Mary a-heure 10)
+    (trouver du sang dans salle-de-conference)
+    (le temoin Luis a vue John dans jardin a 10 heure)
+    ) 
+(deffacts Armes
+
+    ; Liste des armes et leurs blessures
+
+    (blessure tranchante peut etre faite par arme couteau)
+
+    (blessure tranchante peut etre faite par arme hache)
+
+    (blessure contendante peut etre faite par arme statuette)
+
+	(blessure contendante peut etre faite par arme hache)
+    (blessure contendante peut etre faite par arme pelle)
+
+	(blessure projectile peut etre faite par arme fusil)
+
+	;(blessure projectile peut etre faite par arme arc)
+
+
+    ; Liste des lieu ou sont les armes
+
+    (arme couteau est dans cuisinne)
+
+	(arme hache est dans halle)
+	
+	(arme statuette est dans bureauVP)
+	
+	(arme fusil est dans locker)
+
+    (arme pelle est dans jardin)
+
+)
+(deffacts Victime
+
+    ; Qui
+
+    (victime Robert est morte)
+
+
+    ; Blessure
+
+    (mort blessure contendante)
+
+
+    ; Info lieu
+
+    (mort lieu jardin)
+
+)
+
+

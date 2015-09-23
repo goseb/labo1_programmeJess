@@ -1,23 +1,32 @@
 (clear)
 
-(deffacts Personnage
+(deffacts Personnages
 
     ; Personnages
 
     (travail de Robert est vice-president)
-
     (travail de Alicia est menagere)
-
     (travail de Mary est conseiller)
-
 	(travail de Peter est diplomate)
-
 	(travail de Luis est paysagiste)
-
 	(travail de John est guarde-du-corps)
+    
+     ;foce physique
+    (force de Mary est faible)
+    (force de Alicia est eleve)
+    (force de Peter est eleve)
+    (force de Luis est eleve)
+    
+    ;
+    (deplacement de Peter par passage secret)
+    (deplacement de Alicia avec clef)
+    (deplacement de Luis restrain)
+    (deplacement de John par passage secret)
+    (deplacement de Mary est discret)
+    
 
 )
-(deffacts Relation
+(deffacts Relations
 
     ; Relations personnages
 
@@ -41,42 +50,41 @@
 	(responsable du contrat de paysagiste est conseiller)
 
 )
-(deffacts Location
+(deffacts Acces-au-Lieux
 
     ; Acces des lieu
 
-    (acces entre cafeteria et salle-de-conference)
-    (acces entre hall-entree et jardin)
-    (acces entre bureauVP et salle-de-conference)
-	(acces entre sale-de-bain et salle-de-conference)
-	(acces entre halle-entre et cafeteria)
-    (acces entre cabane-jardinier et jardin)
-	(acces entre salle-de-conference et jardin)
-    (acces entre cuisine et cafeteria)
+    (acces entre cafeteria et salle-de-conference en 10 minutes)
+    (acces entre hall-entree et jardin en 20 minutes)
+    (acces entre bureauVP et salle-de-conference en 30 minutes)
+	(acces entre sale-de-bain et salle-de-conference 40 minutes)
+	(acces entre halle-entre et cafeteria en 50 minutes)
+    (acces entre cabane-jardinier et jardin 60 minutes)
+	(acces entre salle-de-conference et jardin en 10 minutes)
+    (acces entre cuisine et cafeteria en 20 minutes)
     
    (passage secret entre cuisine et jardin)
 
 )
-(deffacts Evenement
-	(meurtre est un evenement)
-    (rencontre est un evenement)
-    (travailler est un evenement)
-    (quitter travail est un evenement)
-    (renvoyer est un evenement)
-  
-)
+
 (deffacts Faits
 
       ; Personnage dans lieu a un moment donne == ;au-lieu, du-temp,au-temp, a-Lheure
 
-    (evenement produit de-temps 8 a-temps 10)
-	(meurtre endroit jardin )
+    (l'evenement s'est produit de-temps 8 a-temps 10)
+	(corp découvert dans jardin )
     (meurtre instrument contendante)
-    (acces de salle-de-conference par garde-du-corp a-heure 9)
+    (acces de jardin par garde-du-corp a-heure 9)
     (acces de sale-de-bain par Mary a-heure 10)
+    (trouver du sang dans bureauVP)
+    (le temoin Luis a vue Mary dans jardin a 7 heure)
+    (le temoin Luis a vue Peter dans jardin a 9 heure)
+     (presence de John dans jardin a-temps 9 heure)
+   ;(presence de John dans salle-de-conference a-temps 8 heure)
     
-    ) 
-(deffacts Arme
+    
+     ) 
+(deffacts Armes
 
     ; Liste des armes et leurs blessures
 
@@ -96,15 +104,15 @@
 
     ; Liste des lieu ou sont les armes
 
-    (arme couteau est dans cuisinne)
+    (objet couteau est dans cuisinne)
 
-	(arme hache est dans halle)
+	(objet hache est dans halle)
 	
-	(arme statuette est dans bureauVP)
+	(objet statuette est dans bureauVP)
 	
-	(arme fusil est dans locker)
+	(objet fusil est dans locker)
 
-    (arme pelle est dans jardin)
+    (objet pelle est dans jardin)
 
 )
 (deffacts Victime
