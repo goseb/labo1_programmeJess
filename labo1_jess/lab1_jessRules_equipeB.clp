@@ -25,12 +25,36 @@
 
 (defrule DeplacementCorps
 	;regle qui permet de faire le lien entre des traces de sang et un déplacement possible du corp
-    (trouver du sang dans ?endroitTrouverPreuve)
-    (corp découvert dans ?endroitCorp )
+	; nous considérons qu'il y a se moins en moins de sang pour le déplacement
+	
+    (quantite ?litreMin de sang dans ?endroitTrouverPreuve)
+    
+    (quantite ?litreMax de sang dans ?secondEndroit)
+    (test(< ?litreMin ?litreMax ))
+   
     =>
+    (printout t  " deplacement possible entre: " ?endroitTrouverPreuve " et " ?secondEndroit crlf)
+   ; (assert (meurtre a eu lieu a ?endroitTrouverPreuve))
+    (assert (deplacement de ?endroitTrouverPreuve a ?secondEndroit))
+   
+    
+)
+
+
+(defrule CheminCorps
+	;regle qui permet de faire le lien entre des traces de sang et un déplacement possible du corp
+	
+    ;(trouver du sang dans ?endroitTrouverPreuve)
+    
+    (corp decouvert dans ?secondEndroit )
+   ( while (exists (deplacement de ?premierEndroit a ?secondEndroit))
+    do	?secondEndroit = ?premierEndroit
+   )
+    =>
+    
     (printout t  " meurtre a eu lieu a endroit trouvé sang: " ?endroitTrouverPreuve " et deplacé dans " ?endroitCorp crlf)
-    (assert (meurtre a eu lieu a ?endroitTrouverPreuve))
-    (assert (corps a ete deplace de ?endroitTrouverPreuve a ?endroitCorp))
+    (assert (meurtre a eu lieu a ?secondEndroit))
+    ;(assert (l)
 )
 
 (defrule Temoignage
