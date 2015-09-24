@@ -18,11 +18,17 @@
     (force de Luis est eleve)
     
     ;
-    (deplacement de Peter par passage secret)
-    (deplacement de Alicia avec clef)
-    (deplacement de Luis restrain)
-    (deplacement de John par passage secret)
-    (deplacement de Mary est discret)
+    (deplacement de (nom Peter) par passage secret)
+    (deplacement de (nom Alicia) avec clef)
+    (deplacement de (nom Luis) restrain)
+    (deplacement de (nom John) par passage secret)
+    (deplacement de (nom Mary) est discret)
+    
+      (objet de (nom Peter) (arme fusil))
+    (objet de (nom Alicia) (arme poison))
+    (objet de (nom Luis) (arme pelle))
+    (objet de (nom John) (arme couteau))
+    (objet de (nom Mary) (arme beaute))
     
 
 )
@@ -66,10 +72,6 @@
     (l'evenement s'est produit de-temps 8 a-temps 10)
 	(corp découvert dans jardin )
 
-    (quantite 2 de sang dans bureauVP)
-    (quantite 1 de sang dans cafeteria)
-    (quantite 0 de sang dans halle-entree)
-    
     (meurtre instrument contendante)
 
     (acces de jardin par garde-du-corp a-heure 9)

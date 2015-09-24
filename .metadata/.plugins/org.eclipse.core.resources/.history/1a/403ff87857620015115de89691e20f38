@@ -38,7 +38,7 @@
     =>
     (printout t  " deplacement possible entre: " ?endroitTrouverPreuve " et " ?secondEndroit crlf)
    ; (assert (meurtre a eu lieu a ?endroitTrouverPreuve))
-    (assert (deplacement de ?secondEndroit a ?endroitTrouverPreuve))
+    (assert (deplacement de ?endroitTrouverPreuve a ?secondEndroit))
    
     
 )
@@ -59,7 +59,7 @@
         
    ;; do	
     
-    (test (eq ?sangMax ?endroitTrouverPreuve) )
+    (test (= ?sangMax ?endroitTrouverPreuve) )
    
     
      =>   
@@ -114,7 +114,7 @@
      
 )
 
-(defrule suspectProximite
+(defrule ProximiteMeurtre
 
     ; était possiblement sur les lieux selon un intervalle de temps
 
@@ -135,31 +135,21 @@
     (or (test(<= ?TempMin ?tempFin ))  (test(>= ?TempMax ?tempDebut)))
    ;(test)+-
     
-    (test(eq ?lieuEvenement ?lieu))
+    (test(== ?lieuEvenement ?lieu))
     =>
 
     (printout t "si " ?personne " etait dans " ?lieu " entre " ?tempDebut " et " ?tempFin " heure peut etre a proximite de " ?lieuEvenement  crlf)
 
-    (assert (personne-lieu ?personne et ?lieuEvenement de ?tempDebut a-temps ?tempFin))
+    (assert (personne-lieu ?personne et ?lieuEvenement a ?heure))
 )
 
-(defrule armeLieu
+(defrule arme-lieu-du-meurtre
     (objet ?objet est dans ?lieuEvenement)
+    (personne-lieu ?personne et ?lieuEvenement a ?heure)
     (arme potentiel ?arme)
-    (test(eq ?objet ?arme))
+    (test(= ?objet ?arme ))
     =>
-    (assert(arme ?arme et dans lieu ?lieuEvenement))
-    )
-
-(defrule suspectArme
-    ;(objet ?objet est dans ?lieuEvenement)
-    (personne-lieu ?personne et ?lieuEvenement de ?tempDebut a-temps ?tempFin)
-    ;(arme potentiel ?arme)
-    (arme ?arme et dans lieu ?lieu)
-    
-    (test(eq ?lieuEvenement ?lieu ))
-    =>
-    (printout t  ?personne " peut etre sur lieux du crime avec " ?arme  crlf)
+    (printout t  ?personne " peut être sur lieux du crime avec " ?arme  crlf)
     (assert (arme-lieu-du-meurtre ?personne))
 )
 
@@ -255,7 +245,7 @@
 
     =>
 
-    (printout t "Le crime a ete fait par " ?nom " avec le/la " ?arme ", une blessure " ?blessure "." crlf)
+    (printout t "Le crime a été fait par " ?nom " avec le/la " ?arme ", une blessure " ?blessure "." crlf)
 
     (assert (Meurtrier ?nom))
 

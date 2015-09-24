@@ -3,11 +3,26 @@
 (batch "jessFact.clp")
 ;(batch "jessFact_2ieme-histoire.clp")
 
+(defquery trouverArme
+ ;trouver un type d'arme
+  (declare (variables ?personne))
+  (objet de nom ?personne arme ?arme)
+    )
 
 
+(defrule testQuery
+    
+    
+    (corp peut etre deplace par ?personne)
+    
+    (bind ?result run-query* trouverArme ?personne)
+	(while ?result next)
+    =>
+    (printout t ?result  crlf)
+    )
 
 (defrule DeplacerCorpForce
-; regle qui permet de v�rifier si une personne �tait assez fort pour d�placer le corp
+; regle qui permet de vérifier si une personne était assez forte pour déplacer le corp
     (corps a ete deplace de ?endroitTrouverPreuve a ?endroitCorp)
     (force de ?personne est eleve)
     =>   
@@ -17,7 +32,7 @@
     )
 
 (defrule DeplacementSansEtreVue
-    ;regle qui v�rifie un deplacement selon la discretion d'un personnages
+    ;********* regle qui vérifi les déplacements possible des personnages
     (or (deplacement de ?personne par passage secret)
     (deplacement de ?personne est discret))
     =>
@@ -27,8 +42,8 @@
 
 
 (defrule DeplacementCorps
-	;regle qui permet de faire le lien entre des traces de sang et un d�placement possible du corp
-	; nous consid�rons qu'il y a se moins en moins de sang pour le d�placement
+	;regle qui permet de faire le lien entre des traces de sang et un déplacement possible du corp
+	; nous considérons qu'il y a se moins en moins de sang pour le déplacement
 	
     (quantite ?litreMin de sang dans ?endroitTrouverPreuve)
     
@@ -38,40 +53,27 @@
     =>
     (printout t  " deplacement possible entre: " ?endroitTrouverPreuve " et " ?secondEndroit crlf)
    ; (assert (meurtre a eu lieu a ?endroitTrouverPreuve))
-    (assert (deplacement de ?secondEndroit a ?endroitTrouverPreuve))
+    (assert (deplacement de ?endroitTrouverPreuve a ?secondEndroit))
    
     
 )
 
 
 (defrule CheminCorps
-	;regle qui permet de faire le lien entre des traces de sang et un deplacement possible du corp
+	;regle qui permet de faire le lien entre des traces de sang et un déplacement possible du corp
 	
     ;(trouver du sang dans ?endroitTrouverPreuve)
-    (deplacement de ?sangMax a ?sangMin)
-    (deplacement de ?endroitTrouverPreuve a ?secondEndroit)
     
-    ;(corp decouvert dans ?endroit )
- 
+    (corp decouvert dans ?secondEndroit )
+   ;( while (exists (deplacement de ?premierEndroit a ?secondEndroit))
+   ;; do	?secondEndroit = ?premierEndroit
+   ;)
+    =>
     
-    ;( while(exists (deplacement de ?sangMax a ?sangMin) then
-     ;  (= ?sangMax ?sangMin); deplacement de ?premierEndroit a ?secondEndroit)
-        
-   ;; do	
-    
-    (test (eq ?sangMax ?endroitTrouverPreuve) )
-   
-    
-     =>   
-        (assert (meurtre a eu lieu a ?sangMax) )
-    (printout t  " meurtre a eu lieu a " ?sangMax crlf)
-    
-       
-    )
     ;(printout t  " meurtre a eu lieu a endroit trouvé sang: " ?endroitTrouverPreuve " et deplacé dans " ?endroitCorp crlf)
-   
+    (assert (meurtre a eu lieu a ?secondEndroit))
     ;(assert (l)
-
+)
 
 (defrule Temoignage
 	; regle qui dit qu'un temoin qui voit quelqu'un sur les lieux est lui même sur les lieux
@@ -79,8 +81,8 @@
 
     =>
     
-    (printout t ?personne " a ete vue a " ?lieu " a " ?heure " heure" crlf)
-    (printout t ?temoin " le temoin etait dans " ?lieu " a " ?heure " heure" crlf)
+    (printout t ?personne " a été vue a " ?lieu " a " ?heure " heure" crlf)
+    (printout t ?temoin " le témoin était dans " ?lieu " a " ?heure " heure" crlf)
     
     (assert (presence de ?personne dans ?lieu a-temps ?heure heure))
     (assert (presence de ?temoin dans ?lieu a-temp ?heure heure))
@@ -91,8 +93,8 @@
 	(acces entre ?lieuAdjacent et ?lieu en ?minute minutes)
 	;(not (exists (acces entre ?lieu et ?lieuAdjacent en ?minute minutes))
 	=>
-	(assert (acces entre ?lieu et ?lieuAdjacent en ?minute minutes))
-        
+	(assert (acces entre ?lieu et ?lieuAjacent en ?minute minutes))
+        (assert (acces entre ?lieuAjacent et ?lieu en ?minute minutes))
 )
 
 (defrule Proximite
@@ -100,21 +102,22 @@
     (presence de ?personne dans ?lieu a-temps ?heure heure)
     (acces entre ?lieuAdjacent et ?lieu en ?minute minutes)
   	;(/ ?minute 60.0)
-	;?a <- (+ ?minute 0.016)
- 	
+	?a <- (/ ?minute 60.0)
+	 ?b <- (+ ?heure ?a)
+    ;(bind ?a (+(+ 2 3) (* 3 3)))
+      ;?x<- (/ ?temp 60)
+    
+    ?lapsDeTempMin <-(- ?heure ?b)
+   ?lapsDeTempMax <-(+ ?heure ?b)
      =>
-    (bind ?a 1)
-    (bind ?a(* ?minute 0.016))
-        
-    (bind ?lapsDeTempMin (- ?heure ?a))
-   	(bind ?lapsDeTempMax (+ ?heure ?a))
-       
-    (printout t ?personne " a pu etre s proximite de " ?lieuAdjacent " entre " ?lapsDeTempMin " heure et " ?lapsDeTempMax " heure "crlf)
+    (printout t ?personne " était près de " ?lieu " entre " ?lapsDeTempMin " heure et " ?lapsDeTempMax " heure "crlf)
     (assert (proximite de ?personne dans ?lieuAdjacent entre ?lapsDeTempMin et ?lapsDeTempMax ))
-     
+    
+   ; (printout t  " proximité de " ?personne " dans "?lieuAdjacent " a " ?heure " heures plus ou moins " ?minute " minutes ----> "  crlf)
+    ;(assert (proximite de ?personne dans ?lieuAdjacent a ?heure en ?minute minutes))
 )
 
-(defrule suspectProximite
+(defrule ProximiteMeurtre
 
     ; était possiblement sur les lieux selon un intervalle de temps
 
@@ -124,42 +127,28 @@
 
     ;(acces de ?lieuAcces par ?personne a-heure ?tempAcces)
  	;(proximite de ?personne dans ?lieuAdjacent entre ?lapsDeTempMin et ?lapsDeTempMax)
-    ;(proximite de ?personne dans ?lieuAdjacent a ?heure en ?minute minutes)
+    (proximite de ?personne dans ?lieuAdjacent a ?heure en ?minute minutes)
      
-    (proximite de ?personne dans ?lieu entre ?TempMin et ?TempMax)
-    
     (l'evenement s'est produit de-temps ?tempDebut a-temps ?tempFin )
 
     ;(acces entre ?lieuAcces et ?lieuEvenement)
 
-    (or (test(<= ?TempMin ?tempFin ))  (test(>= ?TempMax ?tempDebut)))
-   ;(test)+-
-    
-    (test(eq ?lieuEvenement ?lieu))
+    ;(test(<= ?lapsDeTempMin ?tempFin ))
+    ;(test(>= ?lapsDeTempMax ?tempDebut))
     =>
 
-    (printout t "si " ?personne " etait dans " ?lieu " entre " ?tempDebut " et " ?tempFin " heure peut etre a proximite de " ?lieuEvenement  crlf)
+    (printout t "si " ?personne " était dans " ?lieuAdjacent " entre " ?tempDebut " et " ?tempFin " heure peut être a proximite de " ?lieuEvenement  crlf)
 
-    (assert (personne-lieu ?personne et ?lieuEvenement de ?tempDebut a-temps ?tempFin))
+    (assert (personne-lieu ?personne et ?lieuEvenement a ?heure))
 )
 
-(defrule armeLieu
+(defrule arme-lieu-du-meurtre
     (objet ?objet est dans ?lieuEvenement)
+    (personne-lieu ?personne et ?lieuEvenement a ?heure)
     (arme potentiel ?arme)
-    (test(eq ?objet ?arme))
+    (test(= ?objet ?arme ))
     =>
-    (assert(arme ?arme et dans lieu ?lieuEvenement))
-    )
-
-(defrule suspectArme
-    ;(objet ?objet est dans ?lieuEvenement)
-    (personne-lieu ?personne et ?lieuEvenement de ?tempDebut a-temps ?tempFin)
-    ;(arme potentiel ?arme)
-    (arme ?arme et dans lieu ?lieu)
-    
-    (test(eq ?lieuEvenement ?lieu ))
-    =>
-    (printout t  ?personne " peut etre sur lieux du crime avec " ?arme  crlf)
+    (printout t  ?personne " peut être sur lieux du crime avec " ?arme  crlf)
     (assert (arme-lieu-du-meurtre ?personne))
 )
 
@@ -255,7 +244,7 @@
 
     =>
 
-    (printout t "Le crime a ete fait par " ?nom " avec le/la " ?arme ", une blessure " ?blessure "." crlf)
+    (printout t "Le crime a été fait par " ?nom " avec le/la " ?arme ", une blessure " ?blessure "." crlf)
 
     (assert (Meurtrier ?nom))
 
@@ -281,26 +270,4 @@
     (assert ())
     )*/
 
-/*
 
-essai d'un query
-(defquery trouverArme
- ;trouver un type d'arme
-  (declare (variables ?personne))
-  (objet de nom ?personne arme ?arme)
-    )
-
-
-(defrule testQuery
-    
-    
-    (corp peut etre deplace par ?personne)
-    
-    (bind ?result run-query* trouverArme ?personne)
-	(while ?result next)
-    =>
-    (printout t ?result  crlf)
-    )
-
-
-*/

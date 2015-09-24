@@ -255,7 +255,7 @@
 
     =>
 
-    (printout t "Le crime a ete fait par " ?nom " avec le/la " ?arme ", une blessure " ?blessure "." crlf)
+    (printout t "Le crime a été fait par " ?nom " avec le/la " ?arme ", une blessure " ?blessure "." crlf)
 
     (assert (Meurtrier ?nom))
 

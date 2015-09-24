@@ -38,7 +38,7 @@
     =>
     (printout t  " deplacement possible entre: " ?endroitTrouverPreuve " et " ?secondEndroit crlf)
    ; (assert (meurtre a eu lieu a ?endroitTrouverPreuve))
-    (assert (deplacement de ?secondEndroit a ?endroitTrouverPreuve))
+    (assert (deplacement de ?endroitTrouverPreuve a ?secondEndroit))
    
     
 )
@@ -151,7 +151,7 @@
     (assert(arme ?arme et dans lieu ?lieuEvenement))
     )
 
-(defrule suspectArme
+(defrule arme-lieu-du-meurtre
     ;(objet ?objet est dans ?lieuEvenement)
     (personne-lieu ?personne et ?lieuEvenement de ?tempDebut a-temps ?tempFin)
     ;(arme potentiel ?arme)
@@ -255,7 +255,7 @@
 
     =>
 
-    (printout t "Le crime a ete fait par " ?nom " avec le/la " ?arme ", une blessure " ?blessure "." crlf)
+    (printout t "Le crime a été fait par " ?nom " avec le/la " ?arme ", une blessure " ?blessure "." crlf)
 
     (assert (Meurtrier ?nom))
 
