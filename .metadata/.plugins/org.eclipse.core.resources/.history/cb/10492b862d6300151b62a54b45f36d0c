@@ -125,7 +125,7 @@
     =>
     (bind ?b(* ?minute 0.016))
         
-    (bind ?tempMeurtrePossible (+ ?heure ?b))
+    (bind ?tempMeurtrePossible (- ?heure ?b))
    	
     (printout t "evenement produit entre " ?tempMeurtrePossible " et " ?temp " heure" crlf)
        (assert(evenement produit entre ?tempMeurtrePossible et ?temp heure ))

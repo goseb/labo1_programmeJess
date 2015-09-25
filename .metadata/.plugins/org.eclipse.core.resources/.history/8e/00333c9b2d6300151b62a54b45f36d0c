@@ -78,7 +78,7 @@
    ; (trouver du sang dans bureauVP)
 
     ;(le temoin Luis a vue Mary dans jardin a 7 heure)
-    (le temoin Luis a vue john dans salle-de-conference a 9 heure)
+    (le temoin Luis a vue garde-du-corp dans salle-de-conference a 9 heure)
 
     ;(presence de John dans jardin a-temps 9 heure)
    ;(presence de John dans salle-de-conference a-temps 8 heure)    

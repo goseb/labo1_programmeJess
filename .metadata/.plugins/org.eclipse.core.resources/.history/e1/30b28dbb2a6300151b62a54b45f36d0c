@@ -116,7 +116,7 @@
     
     (corp decouvert dans ?lieu a ?temp heures)
     (victime etait dans ?endroit a ?heure heure)
-    (acces entre ?lieu2 et ?lieu1 en ?minute minutes)
+    (acces entre ?lieu1 et ?lieu2 en ?minute minutes)
     (meurtre a eu lieu dans ?lieuMeurtre)
      
     (test(eq ?lieu1 ?endroit))
@@ -125,11 +125,11 @@
     =>
     (bind ?b(* ?minute 0.016))
         
-    (bind ?tempMeurtrePossible (+ ?heure ?b))
+    (bind ?tempMeurtrePossible (- ?heure ?b))
    	
-    (printout t "evenement produit entre " ?tempMeurtrePossible " et " ?temp " heure" crlf)
+    
        (assert(evenement produit entre ?tempMeurtrePossible et ?temp heure ))
-	
+	(printout t "evenement produit entre " ?tempMeurtrePossible " et " ?temp " heure" crlf)
     )
 
 (defrule suspectProximite
@@ -146,7 +146,7 @@
      
     (proximite de ?personne dans ?lieu a ?Temp heure)
     
-    (evenement produit entre ?tempDebut et ?tempFin heure )
+    (evenement produit entre ?tempDebut et ?tempFin )
 
     ;(acces entre ?lieuAcces et ?lieuEvenement)
 
@@ -286,7 +286,7 @@
 (reset)
 
 (run)
-
+(run)
 /*
 (defrule lienTemps
     

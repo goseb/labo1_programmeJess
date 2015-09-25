@@ -115,21 +115,11 @@
 (defrule ecartTemp
     
     (corp decouvert dans ?lieu a ?temp heures)
-    (victime etait dans ?endroit a ?heure heure)
-    (acces entre ?lieu2 et ?lieu1 en ?minute minutes)
-    (meurtre a eu lieu dans ?lieuMeurtre)
-     
-    (test(eq ?lieu1 ?endroit))
-    (test(eq ?lieu2 ?lieuMeurtre))
+    (victime ?personnage a ete vue dans ?endroit a ?heure heure)
     
     =>
-    (bind ?b(* ?minute 0.016))
-        
-    (bind ?tempMeurtrePossible (+ ?heure ?b))
-   	
-    (printout t "evenement produit entre " ?tempMeurtrePossible " et " ?temp " heure" crlf)
-       (assert(evenement produit entre ?tempMeurtrePossible et ?temp heure ))
-	
+    (assert(evenement produit entre ?heure et ?temp heure ))
+
     )
 
 (defrule suspectProximite
@@ -146,7 +136,7 @@
      
     (proximite de ?personne dans ?lieu a ?Temp heure)
     
-    (evenement produit entre ?tempDebut et ?tempFin heure )
+    (evenement produit entre ?tempDebut et ?tempFin )
 
     ;(acces entre ?lieuAcces et ?lieuEvenement)
 
