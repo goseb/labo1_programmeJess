@@ -64,15 +64,13 @@
 (deffacts Faits
     ; Personnage dans lieu a un moment donne == ;au-lieu, du-temp,au-temp, a-Lheure
     ;(l'evenement s'est produit de-temps 8 a-temps 10)
-	(corp decouvert dans jardin a 10 heures )
+	(corp découvert dans jardin a 10 heures )
 (trouve 1 litre de sang dans salle-de-conference)
     (trouve 2 litre de sang dans bureauVP)
     
     ;(trouve 0.1 litre de sang dans halle-entree)
-     (victime etait dans salle-de-conference a 7 heures)
+     (victime etait dans salle-de-conference a 7 heure)
     (meurtre instrument contendante)
-    
-    (meurtre a eu lieu dans bureauVP)
 
     ;(acces de jardin par garde-du-corp a-heure 9)
     ;(acces de sale-de-bain par Mary a-heure 10)
@@ -80,13 +78,13 @@
    ; (trouver du sang dans bureauVP)
 
     ;(le temoin Luis a vue Mary dans jardin a 7 heure)
-    (le temoin Luis a vue John dans salle-de-conference a 9 heures)
+    (le temoin Luis a vue john dans salle-de-conference a 9 heure)
 
     ;(presence de John dans jardin a-temps 9 heure)
    ;(presence de John dans salle-de-conference a-temps 8 heure)    
 
 
-   (personne Luis a un alibi de 8 heures a 10 heures il etait a endroit cabane-jardinier)
+   
     
    
     )
@@ -103,11 +101,11 @@
 
     ; Liste des lieu ou sont les armes
 
-    (objet couteau est dans lieu cuisinne)
-	(objet hache est dans lieu halle)
-	(objet statuette est dans lieu bureauVP)
-	(objet fusil est dans lieu locker)
-    (objet pelle est dans lieu jardin)
+    (objet couteau est dans cuisinne)
+	(objet hache est dans halle)
+	(objet statuette est dans bureauVP)
+	(objet fusil est dans locker)
+    (objet pelle est dans jardin)
 )
 
 (deffacts Victime

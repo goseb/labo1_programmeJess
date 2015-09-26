@@ -95,7 +95,7 @@
 
 (defrule Proximite
     ;regle qui determine la proximite possible d'une personne en rapport aux acces a ce lieu
-   (presence de ?personne dans ?lieu a ?heure heures)
+    (presence de ?personne dans ?lieu a ?heure heures)
     (acces entre ?lieuAdjacent et ?lieu en ?minute minutes)
   	;(/ ?minute 60.0)
 	;?a <- (+ ?minute 0.016)
@@ -146,7 +146,6 @@
  	;(proximite de ?personne dans ?lieuAdjacent entre ?lapsDeTempMin et ?lapsDeTempMax)
     ;(proximite de ?personne dans ?lieuAdjacent a ?heure en ?minute minutes)
      
-   
     (proximite de ?personne dans ?lieu a ?Temp heures)
     
     
@@ -180,11 +179,11 @@
     
   
     ;(arme potentiel ?arme)
-    (objet ?arme est dans lieu ?lieu)
+    (arme ?arme est dans lieu ?lieu)
     
     (test(eq ?lieuEvenement ?lieu ))
     =>
-    (printout t  ?arme " a ete a proximite de "  ?personne   crlf)
+    (printout t  ?personne " peut etre sur lieux du crime avec " ?arme  crlf)
     (assert (arme a ete a proximite de ?personne))
 )
 
@@ -201,24 +200,6 @@
 	(printout t  ?arme " est une arme potentiel "  crlf)
 	(assert (arme potentiel ?arme))
 )
-
-(defrule Alibi 
-    ; permet d'enlever le nom d'un suspect si il était a un endroit  
-    ; hors de la zone incriminé
-    
-    (suspect ?personne1 a proximite de ?lieuEvenement de ?tempDebut a ?tempFin heures)
-    
-  (personne ?personne2 a un alibi de ?heure1 heures a ?heure2 heures il etait a endroit ?Lieu)
-   
-    (test (eq ?personne1 ?personne2))
-    (not(test (eq ?Lieu ?lieuEvenement )))
-    (test (>= ?heure2 ?tempFin))
-    (test (<= ?heure1 ?tempDebut))
-    
-     =>
-    
-    (printout t  " personne "  ?personne1 " a un alibi"   crlf)
-    )
 
 (defrule SubRelationAmoureuse
 

@@ -211,13 +211,9 @@
   (personne ?personne2 a un alibi de ?heure1 heures a ?heure2 heures il etait a endroit ?Lieu)
    
     (test (eq ?personne1 ?personne2))
-    (not(test (eq ?Lieu ?lieuEvenement )))
-    (test (>= ?heure2 ?tempFin))
-    (test (<= ?heure1 ?tempDebut))
-    
      =>
     
-    (printout t  " personne "  ?personne1 " a un alibi"   crlf)
+    
     )
 
 (defrule SubRelationAmoureuse

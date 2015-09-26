@@ -86,7 +86,7 @@
    ;(presence de John dans salle-de-conference a-temps 8 heure)    
 
 
-   (personne Luis a un alibi de 8 heures a 10 heures il etait a endroit cabane-jardinier)
+   
     
    
     )
@@ -103,11 +103,11 @@
 
     ; Liste des lieu ou sont les armes
 
-    (objet couteau est dans lieu cuisinne)
-	(objet hache est dans lieu halle)
-	(objet statuette est dans lieu bureauVP)
-	(objet fusil est dans lieu locker)
-    (objet pelle est dans lieu jardin)
+    (objet couteau est dans cuisinne)
+	(objet hache est dans halle)
+	(objet statuette est dans bureauVP)
+	(objet fusil est dans locker)
+    (objet pelle est dans jardin)
 )
 
 (deffacts Victime

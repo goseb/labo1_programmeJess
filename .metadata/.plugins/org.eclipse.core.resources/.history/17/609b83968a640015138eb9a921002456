@@ -95,7 +95,7 @@
 
 (defrule Proximite
     ;regle qui determine la proximite possible d'une personne en rapport aux acces a ce lieu
-   (presence de ?personne dans ?lieu a ?heure heures)
+    (exists (presence de ?personne dans ?lieu a ?heure heures))
     (acces entre ?lieuAdjacent et ?lieu en ?minute minutes)
   	;(/ ?minute 60.0)
 	;?a <- (+ ?minute 0.016)
@@ -211,13 +211,9 @@
   (personne ?personne2 a un alibi de ?heure1 heures a ?heure2 heures il etait a endroit ?Lieu)
    
     (test (eq ?personne1 ?personne2))
-    (not(test (eq ?Lieu ?lieuEvenement )))
-    (test (>= ?heure2 ?tempFin))
-    (test (<= ?heure1 ?tempDebut))
-    
      =>
     
-    (printout t  " personne "  ?personne1 " a un alibi"   crlf)
+    
     )
 
 (defrule SubRelationAmoureuse
