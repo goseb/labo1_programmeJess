@@ -64,16 +64,13 @@
 (deffacts Faits
     ; Personnage dans lieu a un moment donne == ;au-lieu, du-temp,au-temp, a-Lheure
     ;(l'evenement s'est produit de-temps 8 a-temps 10)
-	
-    
-    (la victime est vice-president)
-    (corp decouvert dans jardin a 10 heures )
+	(corp decouvert dans jardin a 10 heures )
 (trouve 1 litre de sang dans salle-de-conference)
     (trouve 2 litre de sang dans bureauVP)
-    (mort blessure contendante)
+    
     ;(trouve 0.1 litre de sang dans halle-entree)
      (victime etait dans salle-de-conference a 7 heures)
-   
+    (meurtre instrument contendante)
     
     (meurtre a eu lieu dans bureauVP)
 

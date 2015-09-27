@@ -1,17 +1,9 @@
 
 
-;(batch "jessFact.clp")
-(batch "jessFact_2ieme-histoire.clp")
+(batch "jessFact.clp")
+;(batch "jessFact_2ieme-histoire.clp")
 
-(defrule victime
-    
-    (or (la victime est ?personne)(la victime est ?travail) )
 
-    (travail de ?personne est ?travail)
-    =>
-    
-    (assert(victime est le ?travail ?personne))
-        )
 
 
 (defrule DeplacerCorpForce
@@ -331,32 +323,30 @@
     ;(suspect-a ?nom ?arme)
 
     ;(blessure ?blessure peut etre faite par arme ?arme)
-(drame de ?acte pour ?M)
+
     (corp decouvert dans ?B a ?H7 heures )
-(meurtre a eu lieu dans ?A)
+;(meurtre a eu lieu dans ?A)
 ;(le temoin ?T a vue ?M dans ?L a ?H heures)
-(proximite de ?L dans ?B a ?H2 heures)
-(victime est le ?travail ?victime)
+;(proximite de ?L dans ?B a ?H2 heures)
+;
 ;(evenement produit entre ?H3 et ?H4 heures )
 (suspect ?M a proximite de ?A de ?H5 a ?H6 heures)
 
-(objet ?arme est dans lieu ?A)
+;(arme ?arme est dans lieu ?A)
 ;(arme a ete a proximite de ?M)
 
 
 ;(blessure ?type peut etre faite par arme ?arme)
 
-  (mort blessure ?type )
+  ;(mort blessure ?type )
 
 ;(personne ?M a pu deplace le corp)
    
     
     =>
 
-    (printout t "Le crime a ete fait par " ?M " avec le/la " ?arme ", une blessure de type " ?type "." crlf)
-    (printout t "Le motif du crime est " ?acte " la victime est  " ?victime " morte a  " ?A "." crlf)
-(printout t ?M " etait a proximité de " ?A " entre " ?H5 " et  " ?H6 " heures." crlf)
-    
+    (printout t "Le crime a ete fait par " ?M " avec le/la  ?arme , une blessure  ?type ." crlf)
+
     (assert (Meurtrier ?M))
 
     (halt)

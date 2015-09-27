@@ -1,17 +1,9 @@
 
 
-;(batch "jessFact.clp")
-(batch "jessFact_2ieme-histoire.clp")
+(batch "jessFact.clp")
+;(batch "jessFact_2ieme-histoire.clp")
 
-(defrule victime
-    
-    (or (la victime est ?personne)(la victime est ?travail) )
 
-    (travail de ?personne est ?travail)
-    =>
-    
-    (assert(victime est le ?travail ?personne))
-        )
 
 
 (defrule DeplacerCorpForce
@@ -56,7 +48,7 @@
 (defrule CheminCorps
 	;regle qui permet de faire le lien entre des traces de sang et le deplacement du corp
 	
-    (deplacement de ?endroitSangMax a ?endroitSangMin)
+    (deplacement de ?endroitSangMax a ?endroitSsngMin)
     (deplacement de ?endroitTrouverSang1 a ?endroitTrouverSang2)
     
     ;(corp decouvert dans ?endroit )
@@ -72,7 +64,7 @@
     
      =>   
         (assert (meurtre a eu lieu dans ?endroitSangMax) )
-    (printout t  " meurtre a eu lieu dans " ?endroitSangMax " corp deplace a " ?endroitSangMin  crlf)
+    (printout t  " meurtre a eu lieu dans " ?endroitSangMax crlf)
     
        
     )
@@ -181,7 +173,7 @@
     (arme potentiel ?arme)
     (test(eq ?objet ?arme))
     =>
-    (assert(arme ?arme est dans lieu ?lieuEvenement))
+    (assert(arme ?arme et dans lieu ?lieuEvenement))
     )
 
 (defrule suspectArme
@@ -258,8 +250,8 @@
    (suspect avec motif ?personne)
     
     =>
-    (printout t " personne " ?personne " sur les lieux du crime " ?lieuMeurtre " avec motif "  crlf)
-    (assert (personne ?personne sur les lieux du crime ?lieuMeurtre avec motif))
+    (printout t " personne " ?personne " sur les lieux du crime avec motif ")
+    (assert (personne ?personne sur les lieux du crime ?lieuMeurtre avec motif crlf))
     
     )
 
@@ -300,64 +292,35 @@
     (victime ?victime est morte)
 
 	;a un motif
-	(motif pour tuer ?victime par ?second) 
+	(motif pour tuer ?victime par ?second)
     =>
 
     (printout t ?second " a un motif pour tuer " ?victime ", il est donc suspect" crlf)
 
     (assert (suspect avec motif ?second))
 
+
 )
 
 ;Regle de fin !
 
-(defrule SuspectDeplacement
-    
-    (corp peut etre deplace par ?personne)
-    (deplacement de ?endroitTrouverSang1 a ?endroitTrouverSang2)
-    
-    =>
-    (printout t ?personne" a pu deplacer le corp "  crlf)
-    (assert (personne ?personne a pu deplace le corp))
-    
-    )
+
 
 (defrule Meutrier
 
     (declare (salience 41) )
 
-    ;(arme-crime-possible ?arme)
+    (arme-crime-possible ?arme)
 
-    ;(suspect-a ?nom ?arme)
+    (suspect-a ?nom ?arme)
 
-    ;(blessure ?blessure peut etre faite par arme ?arme)
-(drame de ?acte pour ?M)
-    (corp decouvert dans ?B a ?H7 heures )
-(meurtre a eu lieu dans ?A)
-;(le temoin ?T a vue ?M dans ?L a ?H heures)
-(proximite de ?L dans ?B a ?H2 heures)
-(victime est le ?travail ?victime)
-;(evenement produit entre ?H3 et ?H4 heures )
-(suspect ?M a proximite de ?A de ?H5 a ?H6 heures)
+    (blessure ?blessure peut etre faite par arme ?arme)
 
-(objet ?arme est dans lieu ?A)
-;(arme a ete a proximite de ?M)
-
-
-;(blessure ?type peut etre faite par arme ?arme)
-
-  (mort blessure ?type )
-
-;(personne ?M a pu deplace le corp)
-   
-    
     =>
 
-    (printout t "Le crime a ete fait par " ?M " avec le/la " ?arme ", une blessure de type " ?type "." crlf)
-    (printout t "Le motif du crime est " ?acte " la victime est  " ?victime " morte a  " ?A "." crlf)
-(printout t ?M " etait a proximité de " ?A " entre " ?H5 " et  " ?H6 " heures." crlf)
-    
-    (assert (Meurtrier ?M))
+    (printout t "Le crime a ete fait par " ?nom " avec le/la " ?arme ", une blessure " ?blessure "." crlf)
+
+    (assert (Meurtrier ?nom))
 
     (halt)
 
