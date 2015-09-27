@@ -1,9 +1,32 @@
 
 
-;(batch "jessFact.clp")
-(batch "jessFact_2ieme-histoire.clp")
+(batch "jessFact.clp")
+;(batch "jessFact_2ieme-histoire.clp")
 
-(defrule victime
+
+; meeeerrrrrrdddddeeeeeee
+(deffunction calculTemp (?minute ?minuteDure)
+    ; calcul l'heure plus un temp
+;( bind ?heure 0)
+    
+    (bind ?minuteCalcul (+ ?minute ?minuteDure))
+   ( if (<(/ ?minuteCalcul 60) 1) 
+    then 
+   bind ?minute (+ ?minute (mod ?minutecalcul 60)))
+            else  
+    
+  ( bind ?dureHeure (round(/ ?minuteCalcul 60))
+    bind ?minute (+ ?minute (mod ?minutecalcul 60)))
+   
+        ; bind ?heure (+ ?heure ?dureHeure) 
+ 
+                (return (?minute) )
+
+    )
+
+
+(defrule definirVictime
+                
     
     (or (la victime est ?personne)(la victime est ?travail) )
 
@@ -78,7 +101,6 @@
     )
    
 
-
 (defrule Temoignage
 	; regle qui dit qu'un temoin qui voit quelqu'un sur les lieux est lui meme sur les lieux
     (le temoin ?temoin a vue ?personne dans ?lieu a ?heure heures)
@@ -96,10 +118,22 @@
 	; regle qui determine qu'un acces est possible dans les 2 sens
 	(acces entre ?lieuAdjacent et ?lieu en ?minute minutes)
 	;(not (exists (acces entre ?lieu et ?lieuAdjacent en ?minute minutes))
-	=>
+	
+    =>
 	(assert (acces entre ?lieu et ?lieuAdjacent en ?minute minutes))
         (printout t "acces entre " ?lieu " et " ?lieuAdjacent " em " ?minute " minutes" crlf)
 )
+
+(defrule calculAccesLieu
+    (acces entre ?lieuAdjacent et ?lieu en ?minute minutes)
+    (acces entre ?lieuAdjacent2 et ?lieu2 en ?minute2 minutes)
+    ; (not (exists (acces entre ?lieuAdjacent2 et ?lieu2 en ?minute2 minutes)))
+    (test (and (not ?lieuAdjacent ?lieuAdjacent2) (eq ?lieu ?lieuAdjacent2 )))
+    =>
+    (bind ?minute(+ ?minute ?minute2))
+    (acces entre ?lieuAdjacent et ?lieu2 en ?minute minutes)
+     (printout t "acces entre "?lieuAdjacent " et" ?lieu2 " en " ?minute " minutes " crlf)
+    )
 
 (defrule Proximite
     ;regle qui determine la proximite possible d'une personne en rapport aux acces a ce lieu
