@@ -1,5 +1,3 @@
-
-
 (batch "fact.clp")
 ;(batch "jessFact_2ieme-histoire.clp")
 
@@ -111,12 +109,11 @@
     
     (test (eq ?endroitSangMax ?endroitTrouverSang1) )
    
-    
-     =>   
-    
+     =>
     (assert (meurtre a eu lieu dans ?endroitSangMax))
     (printout t  "meurtre a eu lieu dans " ?endroitSangMax " corp deplace a " ?endroitSangMin  crlf)
 )
+
 
 (defrule Temoignage
 	(declare (salience 40))
@@ -319,7 +316,6 @@
 
     (assert (suspect ?personne a proximite de ?lieuMeurtre entre ?tempDebut et ?tempFin heures))
 )
-
 
 (defrule Meutrier
 	(suspect ?personne a pu deplace le cadavre)
