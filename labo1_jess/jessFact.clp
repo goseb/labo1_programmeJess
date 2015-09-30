@@ -26,6 +26,8 @@
     (force de Peter est au moins moyenne)
     (force de Luis est au moins eleve)
     (force de Robert est au moins moyenne)
+
+    (personne responsable de perte-contrat-paysagiste est Mary)
 )
 
 (deffacts Travail
@@ -50,7 +52,7 @@
     (drame de renvoi pour John)
     (drame de renvoi pour Steven)
 	(drame de transfert pour Peter)
-    (drame de perte-contrat pour Luis)
+    (drame de perte-contrat-paysagiste pour Luis)
     
     (responsable de renvoi-guarde-du-corps est conseiller)
 	(responsable de transfert-diplomate est vice-president)

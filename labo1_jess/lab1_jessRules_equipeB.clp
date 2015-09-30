@@ -1,4 +1,4 @@
-(batch "fact.clp")
+(batch "fact2.clp")
 
 (defrule EvennementObligatoire
 	(evennement ?evennement requis pour ?travail)
@@ -77,11 +77,12 @@
 		(bind ?heureCalcul (?result getInt heure))
 		(if (< (- ?temp ?heureCalcul) ?ecart) then
 			(bind ?heureDebut ?heureCalcul)
+			(bind ?ecart (- ?temp ?heureCalcul))
 		)
 	)
 
     (printout t "meurtre s'est produit entre " ?heureDebut " et " ?temp " heure" crlf)
-    (assert(meurtre s'est produit entre ?heureDebut et ?temp))
+    (assert (meurtre s'est produit entre ?heureDebut et ?temp))
  )
 
 (defrule SubAccesLieu
@@ -237,7 +238,6 @@
 
 (defrule TriangleAmoureux
     (relation amoureuse entre ?premier et ?centre)
-
     (relation amoureuse entre ?second et ?centre)
 
     (not (test (eq ?premier ?second)))

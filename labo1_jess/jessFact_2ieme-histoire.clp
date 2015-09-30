@@ -141,4 +141,5 @@
 
     ; Ou
     (victime vue dans piste a 22)
+    (victime vue dans piste a 20)
 )
