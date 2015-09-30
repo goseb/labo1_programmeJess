@@ -1,4 +1,4 @@
-(batch "fact2.clp")
+(batch "fact.clp")
 
 (defrule EvennementObligatoire
 	(evennement ?evennement requis pour ?travail)
@@ -295,7 +295,7 @@
 	(probleme de jeux pour ?personne)
 	=>
 	(printout t ?personne " veut l'argent de " ?personne2 ", ce qui lui donne un motif pour le tuer" crlf)
-	(assert (motif pour tuer ?personne par ?personne2))
+	(assert (motif pour tuer ?personne2 par ?personne))
 )
 
 (defrule ResponsableDrame
@@ -305,7 +305,6 @@
     =>
 
     (printout t ?responsable " est responsable de " ?drame crlf)
-
     (assert (personne responsable de ?drame est ?responsable)) 
 )
 

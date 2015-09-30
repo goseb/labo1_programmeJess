@@ -46,11 +46,11 @@
 (deffacts Relations
     ; Relations personnages
     (relation amoureuse entre Robert et Alicia)
-    (relation amoureuse entre Alicia et Sergio)
-    (relation amoureuse entre Mary et Sergio)
+    (relation amoureuse entre Alicia et Luis)
 
     (drame de renvoi pour John)
-	(drame de transfert pour Peter )
+    (drame de renvoi pour Steven)
+	(drame de transfert pour Peter)
     (drame de perte-contrat pour Luis)
     
     (responsable de renvoi-guarde-du-corps est conseiller)
@@ -104,7 +104,6 @@
 
     (probleme de jeux pour Alicia)
     (probleme de jeux pour Mary)
-    (probleme de jeux pour Luis)
 )
 
 (deffacts Armes

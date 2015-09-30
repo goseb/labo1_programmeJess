@@ -4,6 +4,7 @@
 
     ; Personnages
     (travail de Bubble-gum est danceuse)
+    (travail de Candy est danceuse)
     (travail de LeBoss est patron)
     (travail de Jack est bouncer)
 	(travail de Tom est bouncer)
