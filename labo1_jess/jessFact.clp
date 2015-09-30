@@ -47,7 +47,7 @@
 (deffacts Relations
     ; Relations personnages
     (relation amoureuse entre Robert et Alicia)
-    (relation amoureuse entre Alicia et Luis)
+    (relation amoureuse entre Alicia et Peter)
 
     (drame de renvoi pour John)
     (drame de renvoi pour Steven)
@@ -104,7 +104,7 @@
     (evennement diner dans cafeteria a 8 heure)
 
     (probleme de jeux pour Alicia)
-    (probleme de jeux pour Mary)
+    (probleme de jeux pour Luis)
 )
 
 (deffacts Armes
@@ -138,8 +138,9 @@
     (corps decouvert dans jardin a 10)
 
     ; Traces
-	(trouve 1 litre de sang dans salle-de-conference)
-    (trouve 2 litre de sang dans bureau-vp)
+    (trouve 1 litre de sang dans halle-entre)
+    (trouve 2 litre de sang dans salle-de-conference)
+    (trouve 3 litre de sang dans bureau-vp)
 
     ; Ou
     (victime vue dans salle-de-conference a 7)

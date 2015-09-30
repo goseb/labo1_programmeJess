@@ -125,6 +125,7 @@
 )
 
 (defrule DeplacementCorps
+	(declare (salience 20))
 	;il y a se moins en moins de sang lors du deplacement
 	
     (trouve ?litreMin litre de sang dans ?endroitTrouverSang1)
@@ -138,17 +139,34 @@
     (assert (deplacement de ?endroitTrouverSang1 a ?endroitTrouverSang2))
 )
 
+(defquery QuantiteDeSang
+	(declare (variables ?endroitSangMax ?endroitSangMin))
+	(trouve ?litreMax litre de sang dans ?endroitSangMax)
+	(trouve ?litreMin litre de sang dans ?endroitSangMin)
+)
+
 (defrule CheminCorps
+	(declare (salience 10))
 	;regle qui permet de faire le lien entre des traces de sang et le deplacement du corp
-	
-    (deplacement de ?endroitSangMax a ?endroitSangMin)
-    (deplacement de ?endroitTrouverSang1 a ?endroitTrouverSang2)
-    
-    (test (eq ?endroitSangMax ?endroitTrouverSang1) )
-   
+	(deplacement de ?endroitSangMax a ?endroitSangMin)
      =>
+
+    (bind ?result (run-query* QuantiteDeSang ?endroitSangMax ?endroitSangMin))
+    (bind ?litreMax 0)
+    (bind ?litreMin 1000)
+	(while (?result next)
+		(if (< (?result getInt litreMin) ?litreMin) then
+			(bind ?endroitMin ?endroitSangMin)
+			(bind ?litreMin (?result getInt litreMin))
+		)
+		(if (> (?result getInt litreMax) ?litreMax) then
+			(bind ?endroitMax ?endroitSangMax)
+			(bind ?litreMax (?result getInt litreMax))
+		)
+	)
+
     (assert (meurtre a eu lieu dans ?endroitSangMax))
-    (printout t  "meurtre a eu lieu dans " ?endroitSangMax " corps deplace a " ?endroitSangMin  crlf)
+    (printout t  "meurtre a eu lieu dans " ?endroitMax " corps deplace a " ?endroitMin  crlf)
 )
 
 (defrule Temoignage
