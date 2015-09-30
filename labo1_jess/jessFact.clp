@@ -22,17 +22,11 @@
 	(poids de Sergio est eleve)
 
     ;Foce physique
-    (force de Mary est faible)
-    (force de Alicia est eleve)
-    (force de Peter est moyenne)
-    (force de Luis est eleve)
-    (force de Robert est moyenne)
-    (force pour etre guarde-du-corps est eleve)
-
-    ;Loisirs
-    (Loisir de Sergio est d'utiliser couteau)
-    (Loisir de Luis est d'utiliser marteau)
-    (Loisir de John est d'utiliser fusil)
+    (force de Mary est au moins faible)
+    (force de Alicia est au moins eleve)
+    (force de Peter est au moins moyenne)
+    (force de Luis est au moins eleve)
+    (force de Robert est au moins moyenne)
 )
 
 (deffacts Travail
@@ -40,9 +34,7 @@
 	(quart de travail de 10 a 18 heures pour guarde-du-corps)
 	(quart de travail de 8 a 16 heures pour paysagiste)
 	(quart de travail de 8 a 17 heures pour conseiller)
-)
 
-(deffacts Salaire
 	(salaire moyen de 30000 dollars par annee pour menagere)
 	(salaire moyen de 30000 dollars par annee pour concierge)
 	(salaire moyen de 40000 dollars par annee pour paysagiste)
@@ -52,6 +44,8 @@
 	(salaire de 100000 dollars pour Peter)
 	(salaire de 150000 dollars pour Sergio)
 	(salaire de 200000 dollars pour Robert)
+
+	(force pour etre guarde-du-corps est eleve)
 )
 
 (deffacts Relations
@@ -64,9 +58,9 @@
 	(drame de transfert pour Peter )
     (drame de perte-contrat pour Luis)
     
-    (responsable du renvoi de guarde-du-corps est conseiller)
-	(responsable du transfert de diplomate est vice-president)
-	(responsable du perte-contrat de paysagiste est conseiller)
+    (responsable de renvoi-guarde-du-corps est conseiller)
+	(responsable de transfert-diplomate est vice-president)
+	(responsable de perte-contrat-paysagiste est conseiller)
 )
 
 (deffacts Acces-au-Lieux
@@ -81,37 +75,41 @@
     (acces entre jardin et cabane-jardin)
     (acces entre cafeteria et piece-concierge)
 
-    (porte barre bureau-vp)
-    (porte barre cabane-jardin)
-    (porte barre piece-concierge)
+    (porte barre pour bureau-vp)
+    (porte barre pour cabane-jardin)
+    (porte barre pour piece-concierge)
 
-    (clef pour bureau-vp dans les mains des vice-president)
-    (clef pour cabane-jardin dans les mains des paysagiste)
-    (clef pour piece-concierge dans les mains des vice-president)
+    (clef pour bureau-vp entre les mains des vice-president)
+    (clef pour bureau-vp entre les mains des concierge)
+    (clef pour cabane-jardin entre les mains des paysagiste)
+    (clef pour piece-concierge entre les mains des concierge)
 )	
 
 (deffacts Faits
-    ; Personnage dans lieu a un moment donne == ;au-lieu, du-temp,au-temp, a-Lheure
-    ;(l'evenement s'est produit de-temps 8 a-temps 10)
+    (le temoin Peter a vue Mary dans salle-de-conference a 9)
+    (le temoin Alicia a vue Peter dans bureau-diplomate a 6)
+    (le temoin Luis a vue John dans bureau-diplomate a 9)
+    (le temoin Sergio a vue John dans bureau-diplomate a 10)
+    (le temoin Luis a vue John dans jardin a 12)
+    (le temoin Alicia a vue Luis dans salle-de-conference a 6)
+    (le temoin Steve a vue John dans bureau-diplomate a 7)
+    (le temoin Sergio a vue John dans bureau-diplomate a 10)
+    (le temoin Steven a vue Steven dans jardin a 16)
 
-    ;(acces de jardin par garde-du-corp a-heure 9)
-    ;(acces de sale-de-bain par Mary a-heure 10)
+    (oublie des clefs dans cafeteria par Steve)
 
-   ; (trouver du sang dans bureauVP)
+    (evennement conference requis pour diplomate)
+    (evennement conference requis pour vice-president)
 
-    ;(le temoin Steve a vue Mary dans jardin a 7 heure)
-    (le temoin Peter a vue Mary dans salle-de-conference a 9 heures)
-    (le temoin Alicia a vue Peter dans bureau-diplomate a 6 heures)
-    (le temoin Luis a vue John dans bureau-diplomate a 9 heures)
-    (le temoin Sergio a vue John dans bureau-diplomate a 10 heures)
-    (le temoin Luis a vue John dans jardin a 12 heures)
-    (le temoin Alicia a vue Luis dans salle-de-conference a 6 heures)
+    (presence requise pour diner de Luis)
+    (presence requise pour diner de Mary)
 
-    ;(presence de John dans jardin a-temps 9 heure)
-   ;(presence de John dans salle-de-conference a-temps 8 heure)    
+    (evennement conference dans salle-de-conference a 8 heure)
+    (evennement diner dans cafeteria a 8 heure)
 
-   (probleme de jeux pour Alicia)
- )
+    (probleme de jeux pour Alicia)
+    (probleme de jeux pour Mary)
+)
 
 (deffacts Armes
     ; Liste des armes et leurs blessures
@@ -122,9 +120,10 @@
     (blessure contendante peut etre faite par arme pelle)
     (blessure contendante peut etre faite par arme marteau)
 
+    (blessure profonde demande une force moyenne)
+    (blessure peu-profonde demande une force faible)
 
     ; Liste des lieu ou sont les armes
-
     (objet couteau est dans cafeteria)
 	(objet hache est dans hall-entre)
 	(objet statuette est dans salle-de-conference)
@@ -137,17 +136,15 @@
     (victime Robert est morte)
 
     ; Blessure
-    (mort blessure contendante)
+    (mort blessure contendante peu-profonde)
 
     ; Info lieu
-    (corp decouvert dans jardin a 10 heures )
+    (corps decouvert dans jardin a 10)
 
     ; Traces
 	(trouve 1 litre de sang dans salle-de-conference)
     (trouve 2 litre de sang dans bureau-vp)
 
     ; Ou
-    (victime vue dans salle-de-conference a 7 heure)
+    (victime vue dans salle-de-conference a 7)
 )
-
-
