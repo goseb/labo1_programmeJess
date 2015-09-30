@@ -1,5 +1,4 @@
-(batch "fact.clp")
-;(batch "jessFact_2ieme-histoire.clp")
+(batch "fact2.clp")
 
 (defrule EvennementObligatoire
 	(evennement ?evennement requis pour ?travail)
@@ -321,11 +320,9 @@
 (defrule DrameMotif
 	(drame de ?acte pour ?cible)
     (personne responsable de ?acte est ?personne)
-
 	=>
-
-	(printout t ?cible " a vecu " ?acte " a cause de " ?responsable " ce qui lui donne un motif pour le tuer" crlf)
-    (assert (motif pour tuer ?responsable par ?cible)) 
+	(printout t ?cible " a vecu " ?acte " a cause de " ?personne " ce qui lui donne un motif pour le tuer" crlf)
+    (assert (motif pour tuer ?personne par ?cible)) 
 )
 
 (defrule SuspectBlessure
@@ -334,7 +331,7 @@
 	(mort blessure ?type ?profondeur)
 
 	=>
-	(printout t ?personne " a pu faire la blessure a " ?victime)
+	(printout t ?personne " a pu faire la blessure a " ?victime crlf)
 	(assert (suspect ?personne a pu faire la blessure a ?victime))
 )
 
@@ -349,12 +346,12 @@
 
 (defrule SuspectMotif
     (victime ?victime est morte)
-	(motif pour tuer ?victime par ?second) 
+	(motif pour tuer ?victime par ?personne)
+
     =>
 
-    (printout t ?second " a un motif pour tuer " ?victime ", il est donc suspect" crlf)
-
-    (assert (suspect avec motif ?second))
+    (printout t ?personne " a un motif pour tuer " ?victime ", il est donc suspect" crlf)
+    (assert (suspect avec motif ?personne))
 
 )
 

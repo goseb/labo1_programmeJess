@@ -30,11 +30,6 @@
 )
 
 (deffacts Travail
-	(quart de travail de 0 a 6 heures pour menagere)
-	(quart de travail de 10 a 18 heures pour guarde-du-corps)
-	(quart de travail de 8 a 16 heures pour paysagiste)
-	(quart de travail de 8 a 17 heures pour conseiller)
-
 	(salaire moyen de 30000 dollars par annee pour menagere)
 	(salaire moyen de 30000 dollars par annee pour concierge)
 	(salaire moyen de 40000 dollars par annee pour paysagiste)
@@ -52,7 +47,7 @@
     ; Relations personnages
     (relation amoureuse entre Robert et Alicia)
     (relation amoureuse entre Alicia et Sergio)
-    (relation amoureuse entre Alicia et Luis)
+    (relation amoureuse entre Mary et Sergio)
 
     (drame de renvoi pour John)
 	(drame de transfert pour Peter )
@@ -109,6 +104,7 @@
 
     (probleme de jeux pour Alicia)
     (probleme de jeux pour Mary)
+    (probleme de jeux pour Luis)
 )
 
 (deffacts Armes
