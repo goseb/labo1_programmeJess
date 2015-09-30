@@ -6,7 +6,6 @@
     (travail de Robert est vice-president)
     (travail de Alicia est menagere)
     (travail de Steve est concierge)
-    (travail de Mary est conseiller)
 	(travail de Peter est diplomate)
 	(travail de Sergio est diplomate)
 	(travail de Luis est paysagiste)

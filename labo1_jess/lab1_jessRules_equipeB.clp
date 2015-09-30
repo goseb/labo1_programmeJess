@@ -85,7 +85,6 @@
  )
 
 (defrule SubAccesLieu
-	(declare (salience 50))
 	; regle qui determine qu'un acces est possible dans les 2 sens
 	(acces entre ?lieuAdjacent et ?lieu)
 	;(not (exists (acces entre ?lieu et ?lieuAdjacent))
@@ -139,7 +138,6 @@
 )
 
 (defrule CheminCorps
-	(declare (salience 30))
 	;regle qui permet de faire le lien entre des traces de sang et le deplacement du corp
 	
     (deplacement de ?endroitSangMax a ?endroitSangMin)
@@ -153,7 +151,6 @@
 )
 
 (defrule Temoignage
-	(declare (salience 40))
 	; regle qui dit qu'un temoin qui voit quelqu'un sur les lieux est lui meme sur les lieux
     (le temoin ?temoin a vue ?personne dans ?lieu a ?heure)
 
@@ -167,7 +164,6 @@
 )
 
 (defrule Proximite
-	(declare (salience 30))
     (presence de ?personne dans ?lieu a ?heure)
 	(acces entre ?lieuAdjacent et ?lieu)
 	(or (not (exists (porte bartre pour ?lieuAdjacent))) (and (exists (porte barre pour ?lieuAdjacent)) (exists (porte-clef de ?personne peut contenir clef pour ?lieuAdjacent))))
