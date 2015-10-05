@@ -112,7 +112,7 @@
 	)
 )
 
-(defrule DeplacerCorpForce
+(defrule DeplacerCorpsForce
     (force de ?personne est au moins ?force)
     (poids de ?personne2 est ?poids)
 
